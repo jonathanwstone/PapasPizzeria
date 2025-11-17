@@ -1,0 +1,20 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: pizza-pos-service  # The name of your service
+spec:
+  template:
+    spec:
+      containers:
+        - image: us-central1-docker.pkg.dev/my-pizza-project-123/pizza-repo/pizza-pos:latest  # <-- Update this
+          ports:
+            - containerPort: 8080  # Your app's port
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres.gbtqiyalzzacoxjmzrxj"  # Use the full Supabase username
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "YoureMyLittleFreakNow"  # <-- Update this
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: "update"

@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="Customer")
 
+// Customer Class
 public class Customer {
     @Id
     @Column(name="phonenumber",unique = true)
