@@ -1,14 +1,14 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: papas-pizzeria-service
+  name: papas-pizzeria-service  # The name of your service
 spec:
   template:
     spec:
       containers:
-        - image: gcr.io/YOUR_PROJECT_ID/papas-pizzeria:latest
+        - image: us-central1-docker.pkg.dev/my-pizza-project-123/pizza-repo/pizza-pos:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8080  # Your app's port
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres"
@@ -16,3 +16,5 @@ spec:
               value: "postgres.gbtqiyalzzacoxjmzrxj"
             - name: SPRING_DATASOURCE_PASSWORD
               value: "YoureMyLittleFreakNow"
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: "update"
