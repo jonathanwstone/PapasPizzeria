@@ -11,7 +11,7 @@ spec:
             - containerPort: 8080  # Your app's port
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres"
+              value: "jdbc:postgresql://db.gbtqiyalzzacoxjmzrxjsupabase.co:5432/postgres"
             - name: SPRING_DATASOURCE_USERNAME
               value: "postgres"
             - name: SPRING_DATASOURCE_PASSWORD
