@@ -1,12 +1,12 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: pizza-pos-service
+  name: papas-pizzeria-service
 spec:
   template:
     spec:
       containers:
-        - image: us-central1-docker.pkg.dev/my-pizza-project-123/pizza-repo/pizza-pos:latest
+        - image: us-central1-docker.pkg.dev/my-pizza-project-123/pizza-repo/papas-pizzeria:latest
           ports:
             - containerPort: 8080
           env:
@@ -16,5 +16,11 @@ spec:
               value: "postgres.gbtqiyalzzacoxjmzrxj"
             - name: SPRING_DATASOURCE_PASSWORD
               value: "YoureMyLittleFreakNow"
+            - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+              value: "org.postgresql.Driver"
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               value: "update"
+            - name: SPRING_JPA_SHOW_SQL
+              value: "true"
+            - name: SPRING_JPA_HIBERNATE_NAMING_PHYSICAL_STRATEGY
+              value: "org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"
