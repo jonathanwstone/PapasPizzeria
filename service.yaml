@@ -1,20 +1,37 @@
-apiVersion: serving.knative.dev/v1
-kind: Service
-metadata:
-  name: pizza-pos-service  # The name of your service
-spec:
-  template:
-    spec:
-      containers:
-        - image: us-central1-docker.pkg.dev/my-pizza-project-123/pizza-repo/pizza-pos:latest  # <-- Update this
-          ports:
-            - containerPort: 8080  # Your app's port
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "postgres.gbtqiyalzzacoxjmzrxj"  # Use the full Supabase username
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: "YoureMyLittleFreakNow"  # <-- Update this
-            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
-              value: "update"
+# cloudbuild.yaml
+steps:
+  # Step 1: Build the Spring Boot JAR
+  - name: 'maven:3.8.5-openjdk-17'
+    entrypoint: 'mvn'
+    args: ['clean', 'package', '-DskipTests']
+
+  # Step 2: Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/papaspizzeria-repo/papaspizzeria:$COMMIT_SHA'
+      - '.'
+
+  # Step 3: Push Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/papaspizzeria-repo/papaspizzeria:$COMMIT_SHA'
+
+  # Step 4: Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run deploy pizza-pos-service \
+          --image us-central1-docker.pkg.dev/$PROJECT_ID/papaspizzeria-repo/papaspizzeria:$COMMIT_SHA \
+          --region us-central1 \
+          --platform managed \
+          --allow-unauthenticated \
+          --set-env-vars SPRING_DATASOURCE_URL=jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres,SPRING_DATASOURCE_USERNAME=postgres.gbtqiyalzzacoxjmzrxj,SPRING_DATASOURCE_PASSWORD=YoureMyLittleFreakNow,SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+# Declare the images Cloud Build will produce
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/papaspizzeria-repo/papaspizzeria:$COMMIT_SHA'
