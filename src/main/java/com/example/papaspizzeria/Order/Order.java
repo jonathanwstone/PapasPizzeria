@@ -74,5 +74,12 @@ public class Order {
     public void setItems(List<OrderItem> items) {
         this.items = items;
     }
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<Transaction> transactions;
+
+    // Getter and setter
+    public List<Transaction> getTransactions() { return transactions; }
+    public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
 }
 
