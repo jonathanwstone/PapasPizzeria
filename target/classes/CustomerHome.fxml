@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.papaspizzeria.Controller">
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff341f" height="48.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+    <Text fill="WHITE" layoutX="10.0" layoutY="36.0" style="-fx-font-size: 27px; -fx-font-weight: bold;" text="Mom's and Pop's Pizzeria">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Text>
+    <Rectangle arcHeight="1.0" arcWidth="1.0" height="2.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.5" width="500.0" />
+    <Text fx:id="CustomerNameText" fill="#030303" layoutX="10.0" layoutY="85.0" style="-fx-font-size: 19px; -fx-font-weight: bold;" text="Welcome Customer" />
+    <Button fx:id="OrderButton" layoutX="10.0" layoutY="128.0" maxHeight="57.0" maxWidth="161.0" minHeight="35.0" minWidth="116.0" mnemonicParsing="false" onAction="#ToOrderScreen" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: white;" text="Place an Order" />
+    <Button fx:id="SignOutButton" layoutX="410.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SignOut" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2;                    -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 15px; -fx-font-weight: bold;                    -fx-text-fill: white;" text="Sign Out">
+        <font>
+          <Font size="11.0" />
+        </font>
+    </Button>
+    <Text fx:id="ErrorText" fill="#f40000" layoutX="35.0" layoutY="353.0">
+        <font>
+          <Font name="System Italic" size="18.0" />
+        </font>
+    </Text>
+   <Button fx:id="ContactUsButton" layoutX="415.0" layoutY="343.0" mnemonicParsing="false" onAction="#ToContactUs" prefHeight="42.0" prefWidth="70.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10;" text="Contact Us" textFill="#eae7e7">
+      <font>
+         <Font name="System Bold" size="9.0" />
+      </font>
+   </Button>
+</AnchorPane>
