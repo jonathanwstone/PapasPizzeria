@@ -62,7 +62,7 @@ public class CustomerController {
     }
 
     //delete by phone #
-    @DeleteMapping("/{firstName}")
+    @DeleteMapping("/{phonenumber}")
     public ResponseEntity<String> deleteCustomer(@PathVariable String phonenumber) {
         customerService.deleteCustomer(phonenumber);
         return new ResponseEntity<>("Customer Deleted Successfully", HttpStatus.OK);

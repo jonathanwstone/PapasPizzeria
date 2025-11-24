@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.papaspizzeria.Controller">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff341f" height="48.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+      <Text fill="WHITE" layoutX="10.0" layoutY="36.0" style="-fx-font-size: 27px; -fx-font-weight: bold;" text="Mom's and Pop's Pizzeria">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="1.0" arcWidth="1.0" height="2.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.5" width="500.0" />
+      <Text fx:id="CustomerNameText" fill="#030303" layoutX="10.0" layoutY="85.0" style="-fx-font-size: 19px; -fx-font-weight: bold;" text="Enter your Card Information" />
+      <Button fx:id="PurchaseButton" layoutX="192.0" layoutY="316.0" maxHeight="57.0" maxWidth="161.0" minHeight="35.0" minWidth="116.0" mnemonicParsing="false" onAction="#Purchase" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: white;" text="Purchase" />
+      <Button fx:id="BackToPayment" layoutX="410.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#BackToPayment" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2;                    -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 15px; -fx-font-weight: bold;                    -fx-text-fill: white;" text="Back">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <Text fx:id="ErrorText" fill="#f40000" layoutX="35.0" layoutY="353.0">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="ContactUsButton" layoutX="415.0" layoutY="343.0" mnemonicParsing="false" onAction="#ToContactUs" prefHeight="42.0" prefWidth="70.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10;" text="Contact Us" textFill="#eae7e7">
+         <font>
+            <Font name="System Bold" size="9.0" />
+         </font>
+      </Button>
+      <Text layoutX="14.0" layoutY="156.0" style="-fx-font-size: 16px;" text="Card Number" />
+      <TextField fx:id="CardNumberTextField" layoutX="14.0" layoutY="163.0" prefHeight="27.0" prefWidth="275.0" style="-fx-background-color: #006400; -fx-text-fill: white;" />
+      <Text layoutX="14.0" layoutY="228.0" style="-fx-font-size: 16px;" text="Name on Card" />
+      <TextField fx:id="NameOnCardTextField" layoutX="14.0" layoutY="233.0" prefHeight="27.0" prefWidth="275.0" style="-fx-background-color: #006400; -fx-text-fill: white;" />
+      <Text layoutX="326.0" layoutY="156.0" style="-fx-font-size: 16px;" text="Expiration" />
+      <TextField fx:id="ExpirationTextField" layoutX="326.0" layoutY="163.0" prefHeight="27.0" prefWidth="175.0" style="-fx-background-color: #006400; -fx-text-fill: white;" />
+      <Text layoutX="326.0" layoutY="228.0" style="-fx-font-size: 16px;" text="CVV" />
+      <TextField fx:id="CVVTextField" layoutX="326.0" layoutY="233.0" prefHeight="27.0" prefWidth="175.0" style="-fx-background-color: #006400; -fx-text-fill: white;" />
+      <Text fx:id="ErrorText" fill="#f40000" layoutX="45.0" layoutY="300.0">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

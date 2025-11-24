@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.papaspizzeria.Controller">
+
+    <Button fx:id="SignUpButton" layoutX="155.0" layoutY="169.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#SignUpClick" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10;" text="Sign Up" textFill="#eceaea">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Button>
+   <Button fx:id="LogInButton" layoutX="155.0" layoutY="238.0" mnemonicParsing="false" onAction="#LogInClick" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10;" text="Log In" textFill="#eae7e7">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font>
+   </Button>
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff341f" height="48.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+   <Text fill="WHITE" layoutX="10.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mom's and Pop's Pizzeria">
+      <font>
+         <Font name="System Bold" size="27.0" />
+      </font>
+   </Text>
+   <Rectangle arcHeight="1.0" arcWidth="1.0" height="2.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.5" width="500.0" />
+   <Text fill="#030303" layoutX="10.0" layoutY="85.0" style="-fx-font-size: 19px; -fx-font-weight: bold;" text="Home" />
+   <Button fx:id="ContactUsButton" layoutX="415.0" layoutY="343.0" mnemonicParsing="false" onAction="#ToContactUs" prefHeight="42.0" prefWidth="70.0" style="-fx-background-color: #006400; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10;" text="Contact Us" textFill="#eae7e7">
+      <font>
+         <Font name="System Bold" size="9.0" />
+      </font>
+   </Button>
+
+</AnchorPane>
