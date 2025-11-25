@@ -10,57 +10,59 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.papaspizzeria.Controller">
    <children>
       <Button layoutX="156.0" layoutY="326.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleGoToBeverage" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-font-weight: Bold; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 10;" text="Next" textFill="WHITE" />
-      <CheckBox fx:id="topping1" layoutX="18.0" layoutY="126.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Cheese" textFill="WHITE">
+      
+      <!-- All checkboxes keep their text for the controller to track -->
+      <CheckBox fx:id="topping1" layoutX="18.0" layoutY="126.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.25$ Cheese" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="topping2" layoutX="156.0" layoutY="126.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Onion" textFill="WHITE">
+      <CheckBox fx:id="topping2" layoutX="156.0" layoutY="126.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.15$ Onion" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="topping3" layoutX="294.0" layoutY="126.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Pineapple" textFill="WHITE">
+      <CheckBox fx:id="topping3" layoutX="294.0" layoutY="126.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.75$ Pineapple" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="topping4" layoutX="18.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.50$ Jalapeno" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="topping4" layoutX="18.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Jalapeno" textFill="WHITE">
+      <CheckBox fx:id="topping5" layoutX="156.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.25$ Olives" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="topping5" layoutX="156.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Olives" textFill="WHITE">
+      <CheckBox fx:id="topping6" layoutX="295.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.25$ Mushrooms" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="topping7" layoutX="17.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.15$ Pepperoni" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="topping8" layoutX="156.0" layoutY="262.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="1$ Premium Chicken" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="9.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="topping9" layoutX="295.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="1$ Italian Sausage" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="topping10" layoutX="17.0" layoutY="262.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.50$ Bacon" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="topping6" layoutX="295.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Mushrooms" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="topping7" layoutX="17.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Pepperoni" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="topping8" layoutX="156.0" layoutY="262.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Premium Chicken" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="topping9" layoutX="295.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Italian Sausage" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="topping10" layoutX="17.0" layoutY="262.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Bacon" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </CheckBox>
-      <CheckBox fx:id="topping11" layoutX="156.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="Beef" textFill="WHITE">
+      <CheckBox fx:id="topping11" layoutX="156.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="116.0" style="-fx-background-color: green; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #000000;" text="0.35$ Beef" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -86,5 +88,8 @@
             <Font name="System Bold" size="9.0" />
          </font>
       </Button>
+      
+      <!-- ADDED: Error text -->
+      <Text fx:id="ErrorText" layoutX="10.0" layoutY="320.0" fill="RED" wrappingWidth="400.0" />
    </children>
 </Pane>

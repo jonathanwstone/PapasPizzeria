@@ -82,19 +82,31 @@
 
     <build>
         <plugins>
-            <!-- Spring Boot plugin -->
+            <!-- Spring Boot plugin - This handles packaging for Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- This will create an executable JAR for the backend -->
+                    <mainClass>com.example.papaspizzeria.PapasPizzeriaApplication</mainClass>
+                </configuration>
             </plugin>
 
-            <!-- JavaFX plugin -->
+            <!-- JavaFX plugin - For running JavaFX during development -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>com.example.papaspizzeria.Main</mainClass>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.example.papaspizzeria.PapasPizzeriaApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,7 +1,12 @@
 package com.example.papaspizzeria;
 
 import com.example.papaspizzeria.sweproject.api.CustomerService;
+import com.example.papaspizzeria.sweproject.api.MenuItemService;
+import com.example.papaspizzeria.sweproject.api.OrderService;
 import com.example.papaspizzeria.sweproject.models.Customer;
+import com.example.papaspizzeria.sweproject.models.MenuItem;
+import com.example.papaspizzeria.sweproject.models.Order;
+import com.example.papaspizzeria.sweproject.models.OrderItem;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +24,7 @@ import java.util.List;
 
 public class Controller {
     Session CustomerSession = Session.getInstance();
+    OrderCart orderCart = OrderCart.getInstance(); // ADD THIS: Order tracking singleton
 
     @FXML private Button SignUpButton;
     @FXML private Button LogInButton;
@@ -48,6 +54,11 @@ public class Controller {
     @FXML private Button PurchaseButton;
     @FXML private Label welcomeText;
     @FXML private String pizza;
+
+    // ADD THESE: For displaying order information
+    @FXML private Label orderTotalLabel;
+    @FXML private Text orderSummaryText;
+    @FXML private Text orderDetailsText;
 
     private List<CheckBox> toppingsCheckboxes;
     private int selectedCount = 0;
@@ -162,16 +173,19 @@ public class Controller {
     @FXML
     public void SignOut() throws IOException {
         CustomerSession.clear();
+        orderCart.reset(); // MODIFIED: Clear order cart when signing out
         BackToMenu();
     }
 
     @FXML
     public void ToOrderScreen() throws IOException {
+        orderCart.reset(); // MODIFIED: Start with fresh order
         Main.setRoot("/Crust.fxml");
     }
 
     @FXML
     public void ToOrderCompleteScreen() throws IOException{
+        updateOrderDisplay(); // MODIFIED: Update display before showing
         Main.setRoot("/OrderComplete.fxml");
     }
 
@@ -239,7 +253,40 @@ public class Controller {
             return;
         }
 
+        // MODIFIED: Actually create and submit the order
+        try {
+            Order order = orderCart.getCurrentOrder();
+            order.setItems(orderCart.getOrderItems());
+            order.setEmployeeId(0); // Set to actual employee ID if needed
+
+            // Submit order to backend API
+            Order createdOrder = OrderService.createOrder(order);
+            orderCart.setCurrentOrder(createdOrder);
+
+            System.out.println("Order created successfully with ID: " + createdOrder.getId());
+            Main.setRoot("/OrderComplete.fxml");
+        } catch (Exception e) {
+            showError("Error creating order: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private Button BackToOrderCompleteButton;
+
+    @FXML
+    public void BackToOrderComplete() throws IOException {
+        updateOrderDisplay(); // MODIFIED: Update display
         Main.setRoot("/OrderComplete.fxml");
+    }
+
+    @FXML
+    private Button OrderDetailsButton;
+
+    @FXML
+    public void ToOrderDetails() throws IOException {
+        updateOrderDisplay(); // MODIFIED: Update display before showing details
+        Main.setRoot("/OrderDetails.fxml");
     }
 
     private void showError(String message) {
@@ -253,6 +300,7 @@ public class Controller {
 
     @FXML
     public void initialize() {
+        // Initialize topping checkboxes
         toppingsCheckboxes = new ArrayList<>();
         toppingsCheckboxes.add(topping1);
         toppingsCheckboxes.add(topping2);
@@ -271,13 +319,22 @@ public class Controller {
                 cb.selectedProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue) {
                         selectedCount++;
+                        // MODIFIED: Track topping selection
+                        orderCart.addTopping(cb.getText());
+                        System.out.println("Added topping: " + cb.getText());
                     } else {
                         selectedCount--;
+                        // MODIFIED: Remove topping
+                        orderCart.removeTopping(cb.getText());
+                        System.out.println("Removed topping: " + cb.getText());
                     }
                     checkSelectionLimit();
                 });
             }
         }
+
+        // MODIFIED: Update display on page load
+        updateOrderDisplay();
     }
 
     private void checkSelectionLimit() {
@@ -302,21 +359,50 @@ public class Controller {
 
     @FXML
     private void handleGoToCrust(ActionEvent event) throws IOException {
+        orderCart.reset(); // Start fresh order
         Main.setRoot("/Crust.fxml");
     }
 
+    // MODIFIED: Now captures selection from button userData
     @FXML
     private void handleGoToSize(ActionEvent event) throws IOException {
+        // Get the button that was clicked
+        Button clickedButton = (Button) event.getSource();
+        String crustSelection = (String) clickedButton.getUserData();
+
+        if (crustSelection != null) {
+            orderCart.setSelectedCrust(crustSelection);
+            System.out.println("Selected crust: " + crustSelection);
+        }
+
         Main.setRoot("/Size.fxml");
     }
 
+    // MODIFIED: Now captures selection from button userData
     @FXML
     private void handleGoToSauce(ActionEvent event) throws IOException {
+        Button clickedButton = (Button) event.getSource();
+        String sizeSelection = (String) clickedButton.getUserData();
+
+        if (sizeSelection != null) {
+            orderCart.setSelectedSize(sizeSelection);
+            System.out.println("Selected size: " + sizeSelection);
+        }
+
         Main.setRoot("/Sauce.fxml");
     }
 
+    // MODIFIED: Now captures selection from button userData
     @FXML
     private void handleGoToToppings(ActionEvent event) throws IOException {
+        Button clickedButton = (Button) event.getSource();
+        String sauceSelection = (String) clickedButton.getUserData();
+
+        if (sauceSelection != null) {
+            orderCart.setSelectedSauce(sauceSelection);
+            System.out.println("Selected sauce: " + sauceSelection);
+        }
+
         Main.setRoot("/Toppings.fxml");
     }
 
@@ -325,19 +411,49 @@ public class Controller {
         Main.setRoot("/Beverage.fxml");
     }
 
+    // MODIFIED: Now captures selection from button userData
     @FXML
     private void handleGoToDesert(ActionEvent event) throws IOException {
+        Button clickedButton = (Button) event.getSource();
+        String beverageSelection = (String) clickedButton.getUserData();
+
+        if (beverageSelection != null) {
+            orderCart.setSelectedBeverage(beverageSelection);
+            System.out.println("Selected beverage: " + beverageSelection);
+        }
+
         Main.setRoot("/Desert.fxml");
     }
 
+    // MODIFIED: Now captures selection from button userData
     @FXML
     private void handleGoToSide(ActionEvent event) throws IOException {
+        Button clickedButton = (Button) event.getSource();
+        String dessertSelection = (String) clickedButton.getUserData();
+
+        if (dessertSelection != null) {
+            orderCart.setSelectedDessert(dessertSelection);
+            System.out.println("Selected dessert: " + dessertSelection);
+        }
+
         Main.setRoot("/Side.fxml");
     }
 
+    // MODIFIED: Creates order items and navigates to payment
     @FXML
     private void handleGoToOrderComplete(ActionEvent event) throws IOException {
-        Main.setRoot("/OrderComplete.fxml");
+        Button clickedButton = (Button) event.getSource();
+        String sideSelection = (String) clickedButton.getUserData();
+
+        if (sideSelection != null) {
+            orderCart.setSelectedSide(sideSelection);
+            System.out.println("Selected side: " + sideSelection);
+        }
+
+        // BUILD ORDER ITEMS FROM SELECTIONS
+        buildOrderItems();
+
+        Main.setRoot("/PaymentMethod.fxml");
     }
 
     @FXML
@@ -373,5 +489,115 @@ public class Controller {
     @FXML
     private void handleBackToMainMenu(ActionEvent event) throws IOException {
         Main.setRoot("/hello-viewold.fxml");
+    }
+
+    // NEW METHOD: Build order items from user selections
+    private void buildOrderItems() {
+        try {
+            // Clear existing items
+            orderCart.getOrderItems().clear();
+
+            // Create a pizza order item combining crust, size, sauce, and toppings
+            // In a real implementation, you'd fetch the actual MenuItem from your database
+            // For now, using estimated prices - REPLACE WITH ACTUAL API CALLS
+
+            float pizzaPrice = calculatePizzaPrice();
+            String pizzaDescription = String.format("%s %s Pizza with %s sauce and toppings: %s",
+                    orderCart.getSelectedSize(),
+                    orderCart.getSelectedCrust(),
+                    orderCart.getSelectedSauce(),
+                    String.join(", ", orderCart.getSelectedToppings())
+            );
+
+            MenuItem pizzaItem = new MenuItem(1, pizzaDescription, pizzaPrice,
+                    String.join(", ", orderCart.getSelectedToppings()));
+            OrderItem pizzaOrderItem = new OrderItem(pizzaItem, 1, pizzaPrice);
+            orderCart.addOrderItem(pizzaOrderItem);
+
+            // Add beverage if selected
+            if (orderCart.getSelectedBeverage() != null && !orderCart.getSelectedBeverage().isEmpty()) {
+                MenuItem beverageItem = new MenuItem(2, orderCart.getSelectedBeverage(), 2.99f, "");
+                OrderItem beverageOrderItem = new OrderItem(beverageItem, 1, 2.99f);
+                orderCart.addOrderItem(beverageOrderItem);
+            }
+
+            // Add dessert if selected
+            if (orderCart.getSelectedDessert() != null && !orderCart.getSelectedDessert().isEmpty()) {
+                MenuItem dessertItem = new MenuItem(3, orderCart.getSelectedDessert(), 4.99f, "");
+                OrderItem dessertOrderItem = new OrderItem(dessertItem, 1, 4.99f);
+                orderCart.addOrderItem(dessertOrderItem);
+            }
+
+            // Add side if selected
+            if (orderCart.getSelectedSide() != null && !orderCart.getSelectedSide().isEmpty()) {
+                MenuItem sideItem = new MenuItem(4, orderCart.getSelectedSide(), 5.99f, "");
+                OrderItem sideOrderItem = new OrderItem(sideItem, 1, 5.99f);
+                orderCart.addOrderItem(sideOrderItem);
+            }
+
+            System.out.println("Built " + orderCart.getOrderItems().size() + " order items");
+            System.out.println("Total: $" + orderCart.calculateTotal());
+
+        } catch (Exception e) {
+            showError("Error building order: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // NEW METHOD: Calculate pizza price based on size and toppings
+    private float calculatePizzaPrice() {
+        float basePrice = 10.99f;
+
+        // Add price based on size
+        if (orderCart.getSelectedSize() != null) {
+            switch (orderCart.getSelectedSize().toLowerCase()) {
+                case "small":
+                    basePrice = 8.99f;
+                    break;
+                case "medium":
+                    basePrice = 10.99f;
+                    break;
+                case "large":
+                    basePrice = 12.99f;
+                    break;
+                case "extra large":
+                case "xlarge":
+                    basePrice = 14.99f;
+                    break;
+            }
+        }
+
+        // Add $1.50 per topping
+        int toppingCount = orderCart.getSelectedToppings().size();
+        basePrice += (toppingCount * 1.50f);
+
+        return basePrice;
+    }
+
+    // NEW METHOD: Update the order display on screen
+    private void updateOrderDisplay() {
+        try {
+            float total = orderCart.calculateTotal();
+
+            // Update total label if it exists
+            if (orderTotalLabel != null) {
+                orderTotalLabel.setText(String.format("$%.2f", total));
+            }
+
+            // Update summary text if it exists
+            if (orderSummaryText != null) {
+                orderSummaryText.setText(orderCart.getOrderSummary());
+            }
+
+            // Update details text if it exists
+            if (orderDetailsText != null) {
+                orderDetailsText.setText(orderCart.getOrderSummary());
+            }
+
+            System.out.println("Display updated - Total: $" + total);
+
+        } catch (Exception e) {
+            System.err.println("Error updating display: " + e.getMessage());
+        }
     }
 }
